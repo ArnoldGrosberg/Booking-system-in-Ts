@@ -1,0 +1,617 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Booking system",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://localhost:8080/",
+            "description": ""
+        }
+    ],
+    "paths": {
+        "/times/available": {
+            "summary": "Path used to manage the list of available times.",
+            "description": "The REST endpoint/path used to list and create zero or more `time` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "tags": [
+                    "/times"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/time"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `time` entities."
+                    }
+                },
+                "operationId": "gettimesavailable",
+                "summary": "List only available times",
+                "description": "Gets a list of available `time` entities."
+            }
+        },
+        "/times": {
+            "summary": "Path used to manage the list of times.",
+            "description": "The REST endpoint/path used to list and create zero or more `time` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "tags": [
+                    "/times"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/time"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `time` entities."
+                    }
+                },
+                "operationId": "gettimes",
+                "summary": "List All times",
+                "description": "Gets a list of all `time` entities."
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new `time` to be created.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/time"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "/times"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response."
+                    },
+                    "400": {
+                        "description": "One or all params are missing"
+                    },
+                    "401": {
+                        "description": "You have to login"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "operationId": "createtime",
+                "summary": "Create a time",
+                "description": "Creates a new instance of a `time`."
+            }
+        },
+        "/times/{timeId}": {
+            "summary": "Path used to manage a single time.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `time`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "tags": [
+                    "/times"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/time"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `time`."
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/time"
+                                }
+                            }
+                        },
+                        "description": "Time not found"
+                    }
+                },
+                "operationId": "gettime",
+                "summary": "Get a time",
+                "description": "Gets the details of a single instance of a `time`."
+            },
+            "delete": {
+                "tags": [
+                    "/times"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    },
+                    "400": {
+                        "description": "One or all params are missing"
+                    },
+                    "404": {
+                        "description": "Time not found"
+                    }
+                },
+                "operationId": "deletetime",
+                "summary": "Delete a time",
+                "description": "Deletes an existing `time`."
+            },
+            "patch": {
+                "requestBody": {
+                    "description": "Edits `time`",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/time"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "/times"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response."
+                    },
+                    "400": {
+                        "description": "One or all params are missing"
+                    },
+                    "401": {
+                        "description": "You have to login"
+                    },
+                    "404": {
+                        "description": "Time not found"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "operationId": "edittime",
+                "summary": "Edit a time",
+                "description": "Edits an instance of a `time`."
+            },
+            "parameters": [
+                {
+                    "name": "timeId",
+                    "description": "A unique identifier for a `time`.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/sessions": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/sessionRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "/sessions"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/sessionResponse"
+                                }
+                            }
+                        },
+                        "description": "Successful login"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/sessionResponse"
+                                }
+                            }
+                        },
+                        "description": "One or all params are missing"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/sessionResponse"
+                                }
+                            }
+                        },
+                        "description": "Unauthorized: email or password is incorrect"
+                    }
+                },
+                "summary": "Login"
+            },
+            "delete": {
+                "tags": [
+                    "/sessions"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Invalid Authorization header format": {
+                                        "value": {
+                                            "error": "Invalid Authorization header format"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Invalid token": {
+                                        "value": {
+                                            "error": "Invalid token"
+                                        }
+                                    },
+                                    "You have to login": {
+                                        "value": {
+                                            "error": "You have to login"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "SessionId does not have an user associated with it": {
+                                        "value": {
+                                            "error": "SessionId does not have an user associated with it"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Session not found"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "summary": "Logout"
+            }
+        },
+        "/times/patient/{timeId}": {
+            "summary": "Path used to book a single time.",
+            "description": "The REST endpoint/path used to book zero or more `time` entities.  This path contains a `PATCH` operation to perform the booking task, respectively.",
+            "patch": {
+                "requestBody": {
+                    "description": "Edits `time`",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/time"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "/times"
+                ],
+                "parameters": [
+                    {
+                        "name": "timeId",
+                        "description": "A unique identifier for a time.",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response."
+                    },
+                    "400": {
+                        "description": "Invalid parameter (id/name/phone)"
+                    },
+                    "404": {
+                        "description": "Time not found"
+                    }
+                },
+                "operationId": "booktime",
+                "summary": "Books a time",
+                "description": "Edits an instance of a `time`."
+            }
+        },
+        "/users": {
+            "summary": "Path used to create a single user.",
+            "description": "The REST endpoint/path used to create zero or more `user` entities.  This path contains a `POST` operation to perform the creation task, respectively.",
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/sessionRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "/users"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User created - returns a `sessionId` for the user."
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "One or all params are missing": {
+                                        "value": {
+                                            "error": "One or all params are missing"
+                                        }
+                                    },
+                                    "Invalid email": {
+                                        "value": {
+                                            "error": "Invalid email"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Bad request"
+                    },
+                    "409": {
+                        "description": "The user already exists. "
+                    }
+                },
+                "operationId": "createUser",
+                "summary": "Creates a user",
+                "description": "Creates a user."
+            }
+        },
+        "/": {
+            "get": {
+                "tags": [
+                    "/"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "text/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns html of the frontend."
+                    }
+                },
+                "operationId": "getFrontend",
+                "summary": "Display the frontend",
+                "description": "Displays the frontend\n"
+            }
+        },
+        "/logs": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/log"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Logs"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error401"
+                                }
+                            }
+                        },
+                        "description": "You have to login"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "summary": "Get logs.",
+                "description": "Gets a list of all logs"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "time": {
+                "title": "Root Type for time",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "day": {
+                        "format": "date",
+                        "type": "string"
+                    },
+                    "start": {
+                        "type": "string"
+                    },
+                    "end": {
+                        "type": "string"
+                    },
+                    "bookedBy": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id": 2,
+                    "day": "2022-02-15",
+                    "start": "8:00",
+                    "end": "8:30",
+                    "bookedBy": "Testing123"
+                }
+            },
+            "sessionRequest": {
+                "title": "Root Type for sessionRequest",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "username": "Admin",
+                    "password": "Password"
+                }
+            },
+            "sessionResponse": {
+                "title": "Root Type for sessionResponse",
+                "description": "",
+                "required": [
+                    "sessionId"
+                ],
+                "type": "object",
+                "properties": {
+                    "sessionId": {
+                        "format": "int32",
+                        "description": "",
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "sessionId": 3
+                }
+            },
+            "error": {
+                "title": "Root Type for error",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "error": "string"
+                }
+            },
+            "error401": {
+                "title": "Root Type for error",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "description": "You have to login",
+                        "type": "string",
+                        "example": "{\r\n  \"error\": \"You have to login\"\r\n}"
+                    }
+                },
+                "example": {
+                    "error": "You have to login"
+                }
+            },
+            "log": {
+                "title": "Root Type for log",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "timeStamp": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "userIp": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "eventName": {
+                        "type": "string"
+                    },
+                    "extraData": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "timeStamp": "2022-11-29 10:16:07",
+                    "userIp": "::1",
+                    "userId": "1",
+                    "eventName": "oAuth2Login",
+                    "extraData": "Arnold Grosberg (arnold.grosberg@voco.ee) logged in with Google OAuth2 as user Admin "
+                }
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "scheme": "bearer",
+                "type": "http"
+            }
+        }
+    }
+}

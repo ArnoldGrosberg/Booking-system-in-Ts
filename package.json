@@ -1,0 +1,35 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express-ws": "^3.0.1",
+    "@types/node": "^18.11.11",
+    "@types/swagger-ui-express": "^4.1.3",
+    "@types/websocket": "^1.0.5",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-ws": "^5.0.2",
+    "fs": "^0.0.1-security",
+    "google-auth-library": "^8.7.0",
+    "https": "^1.0.0",
+    "nodemon": "^2.0.19",
+    "query-string": "^7.1.1",
+    "readline": "^1.3.0",
+    "swagger-ui-express": "^4.5.0",
+    "vue": "^3.2.38",
+    "websocket": "^1.0.34",
+    "ws": "^8.9.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.15"
+  }
+}
