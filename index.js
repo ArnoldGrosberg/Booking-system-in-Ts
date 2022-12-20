@@ -354,15 +354,7 @@ var delay = function (ms) { return new Promise(function (res) { return setTimeou
 app.get('/times', function (req, res) {
     res.send(times);
 });
-app.get('/', function (req, res) {
-    fs.readFile('./index.html', function (err, html) {
-        if (err) {
-            throw err;
-        }
-        res.setHeader('content-type', 'text/html');
-        res.send(html);
-    });
-});
+app.use(express.static(__dirname + '/public'));
 app.patch('/times/:id', requireLogin, function (req, res) {
     // Check that :id is a valid number
     if ((Number.isInteger(req.params.id) && parseInt(req.params.id) > 0)) {

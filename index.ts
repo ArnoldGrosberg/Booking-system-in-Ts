@@ -310,17 +310,7 @@ const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 app.get('/times', (req: Request, res: GetTimeResponse) => {
     res.send(times)
 })
-
-app.get('/', (req: Request, res: Response) => {
-    fs.readFile('./index.html', function (err, html) {
-        if (err) {
-            throw err;
-        }
-        res.setHeader('content-type', 'text/html');
-        res.send(html)
-    });
-
-})
+app.use(express.static(__dirname + '/public'));
 
 app.patch('/times/:id', requireLogin, (req: Request, res: Response) => {
 
@@ -607,7 +597,7 @@ app.delete('/sessions', requireLogin, (req: DeleteSessionRequest, res: Response)
     res.status(204).end()
 })
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
     console.error(err.message, err.stack);
     return res.status(err.statusCode || 500).json({error: err.message});
 });
