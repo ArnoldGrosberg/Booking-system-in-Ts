@@ -603,7 +603,7 @@ app["delete"]('/sessions', requireLogin, function (req, res) {
     log("logout", "User: ".concat(loggedInUser.email, " logged out"));
     res.status(204).end();
 });
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res, _next) {
     console.error(err.message, err.stack);
     return res.status(err.statusCode || 500).json({ error: err.message });
 });
