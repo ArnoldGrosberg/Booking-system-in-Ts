@@ -371,7 +371,7 @@ app.patch('/times/:id', requireLogin, (req: Request, res: Response) => {
         }
 
         // Check that end is bigger than start
-        if (req.body.end < req.body.start) {
+        if (req.body.end.padStart(5, "0") < req.body.start.padStart(5, "0")) {
             return res.status(400).send({error: 'Invalid end'})
         }
         time["end"] = req.body.end
@@ -484,7 +484,7 @@ app.post('/times', (req: PostTimeRequest, res: Response) => {
     newTime.end = req.body.end
 
     // Check that end is bigger than start
-    if (req.body.end < req.body.start) {
+    if (req.body.end.padStart(5, "0") < req.body.start.padStart(5, "0")) {
         return res.status(400).send({error: 'Invalid end'})
     }
 

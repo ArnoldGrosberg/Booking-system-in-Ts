@@ -404,7 +404,7 @@ app.patch('/times/:id', requireLogin, function (req, res) {
             return res.status(400).send({ error: 'Invalid end' });
         }
         // Check that end is bigger than start
-        if (req.body.end < req.body.start) {
+        if (req.body.end.padStart(5, "0") < req.body.start.padStart(5, "0")) {
             return res.status(400).send({ error: 'Invalid end' });
         }
         time["end"] = req.body.end;
@@ -496,7 +496,7 @@ app.post('/times', function (req, res) {
     }
     newTime.end = req.body.end;
     // Check that end is bigger than start
-    if (req.body.end < req.body.start) {
+    if (req.body.end.padStart(5, "0") < req.body.start.padStart(5, "0")) {
         return res.status(400).send({ error: 'Invalid end' });
     }
     if (req.body.phone) {
